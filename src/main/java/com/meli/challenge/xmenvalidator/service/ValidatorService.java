@@ -1,8 +1,11 @@
 package com.meli.challenge.xmenvalidator.service;
 
+import org.springframework.stereotype.Service;
+
 import java.util.Arrays;
 import java.util.List;
 
+@Service
 public class ValidatorService {
     
     //Final validation chain from dna
