@@ -1,9 +1,14 @@
 package com.meli.challenge.xmenvalidator.service;
 
+import com.meli.challenge.xmenvalidator.model.Validations;
+import com.meli.challenge.xmenvalidator.repository.ValidationsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ValidatorService {
@@ -13,6 +18,9 @@ public class ValidatorService {
     //Min value for validate a chain
     private static final int MIN_VALUE_CROSS = 4;
     
+    @Autowired
+    ValidationsRepository validationsRepository;
+    
     /**
      * Validate is mutant according to the dna sequence
      *
@@ -20,15 +28,41 @@ public class ValidatorService {
      * @return boolean
      */
     public boolean isMutant(String[] dna) {
+        
         int countMutantChain = 0;
-        if (dna != null && dna.length != 0) {
-            countMutantChain += validateHorizontal(dna);
-            countMutantChain += validateVertical(dna);
-            if (countMutantChain <= 1) {
-                countMutantChain += validateCross(dna);
+        if (!isDuplicated(Arrays.toString(dna))) {
+            if (dna != null && dna.length != 0) {
+                countMutantChain += validateHorizontal(dna);
+                countMutantChain += validateVertical(dna);
+                if (countMutantChain <= 1) {
+                    countMutantChain += validateCross(dna);
+                }
+            }
+            validationsRepository.save(Validations.builder()
+                    .creationDate(LocalDate.now().toString())
+                    .dna(Arrays.toString(dna))
+                    .isMutant(String.valueOf(countMutantChain > 1))
+                    .build());
+        }
+        
+        return (countMutantChain > 1);
+    }
+    
+    /**
+     * Validate is dna is duplicated on Db
+     * @param dna String sequence
+     * @return boolean
+     */
+    private boolean isDuplicated(String dna) {
+        for (String dnaRecord : validationsRepository.findAll()
+                .stream()
+                .map(Validations::getDna)
+                .collect(Collectors.toList())) {
+            if (dna.equalsIgnoreCase(dnaRecord)) {
+                return true;
             }
         }
-        return (countMutantChain > 1);
+        return false;
     }
     
     /**

@@ -2,3 +2,8 @@ server:
   port: 1964
   servlet:
     contextPath: /x-men-validator-api/v1
+
+amazon:
+  aws:
+    accesskey: AKIA2AEOELHWHPLRQEX2
+    secretkey: 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
