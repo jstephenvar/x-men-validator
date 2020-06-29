@@ -2,3 +2,8 @@ server:
   port: 1964
   servlet:
     contextPath: /x-men-validator-api/v1
+
+amazon:
+  aws:
+    dynamo: dynamo-access-keys
+    region: us-east-1

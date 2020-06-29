@@ -22,7 +22,6 @@ public class ValidatorController {
     @PostMapping("/mutant/")
     public ResponseEntity<String> isMutant(final @RequestBody @Validated SequenceDto sequenceDto) {
         
-        
         if (sequenceDto.getDna() != null && validatorService.isMutant(sequenceDto.getDna())) {
             return ResponseEntity.status(HttpStatus.OK).build();
         }
