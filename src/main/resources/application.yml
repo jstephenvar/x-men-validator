@@ -5,5 +5,5 @@ server:
 
 amazon:
   aws:
-    accesskey: AKIA2AEOELHWHPLRQEX2
-    secretkey: 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
+    dynamo: dynamo-access-keys
+    region: us-east-1
