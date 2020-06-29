@@ -1,25 +1,22 @@
 package com.meli.challenge.xmenvalidator.service;
 
-import com.meli.challenge.xmenvalidator.model.Validations;
-import com.meli.challenge.xmenvalidator.repository.ValidationsRepository;
+import com.meli.challenge.xmenvalidator.model.ValidationModel;
+import com.meli.challenge.xmenvalidator.repository.ValidationRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
+
+import static com.meli.challenge.xmenvalidator.general.Constants.MIN_VALUE_CROSS;
+import static com.meli.challenge.xmenvalidator.general.Constants.SEQUENCES;
 
 @Service
 public class ValidatorService {
     
-    //Final validation chain from dna
-    private static final List<String> sequences = Arrays.asList("AAAA", "CCCC", "GGGG", "TTTT");
-    //Min value for validate a chain
-    private static final int MIN_VALUE_CROSS = 4;
-    
     @Autowired
-    ValidationsRepository validationsRepository;
+    ValidationRepositoryImpl validationRepository;
     
     /**
      * Validate is mutant according to the dna sequence
@@ -27,42 +24,27 @@ public class ValidatorService {
      * @param dna sequence string array
      * @return boolean
      */
+    @Cacheable("dna")
     public boolean isMutant(String[] dna) {
         
         int countMutantChain = 0;
-        if (!isDuplicated(Arrays.toString(dna))) {
+        Optional<ValidationModel> exist = validationRepository.existDna(Arrays.toString(dna).toLowerCase());
+        if (!exist.isPresent()) {
             if (dna != null && dna.length != 0) {
                 countMutantChain += validateHorizontal(dna);
                 countMutantChain += validateVertical(dna);
+                //If counter is over the rule there is not need to perform the cross operation
                 if (countMutantChain <= 1) {
                     countMutantChain += validateCross(dna);
                 }
             }
-            validationsRepository.save(Validations.builder()
-                    .creationDate(LocalDate.now().toString())
-                    .dna(Arrays.toString(dna))
-                    .isMutant(String.valueOf(countMutantChain > 1))
-                    .build());
+            
+            validationRepository.save(Arrays.toString(dna), countMutantChain > 1);
+        } else {
+            return Boolean.parseBoolean(exist.get().getIsMutant());
         }
         
         return (countMutantChain > 1);
-    }
-    
-    /**
-     * Validate is dna is duplicated on Db
-     * @param dna String sequence
-     * @return boolean
-     */
-    private boolean isDuplicated(String dna) {
-        for (String dnaRecord : validationsRepository.findAll()
-                .stream()
-                .map(Validations::getDna)
-                .collect(Collectors.toList())) {
-            if (dna.equalsIgnoreCase(dnaRecord)) {
-                return true;
-            }
-        }
-        return false;
     }
     
     /**
@@ -244,7 +226,7 @@ public class ValidatorService {
     private int validateSequence(String chain, int counter) {
         if (chain.length() >= MIN_VALUE_CROSS) {
             for (int i = 0; i < chain.length() - 3; i++) {
-                for (String sequence : sequences) {
+                for (String sequence : SEQUENCES) {
                     if (chain.substring(i, 4 + i).equalsIgnoreCase(sequence)) {
                         counter++;
                     }

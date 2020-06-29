@@ -1,6 +1,6 @@
 package com.meli.challenge.xmenvalidator.service;
 
-import com.meli.challenge.xmenvalidator.repository.ValidationsRepository;
+import com.meli.challenge.xmenvalidator.repository.ValidationRepositoryImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -18,7 +18,7 @@ public class ValidatorServiceTest {
     private ValidatorService validatorService;
     
     @Mock
-    private ValidationsRepository validationsRepository;
+    private ValidationRepositoryImpl validationRepository;
     
     @BeforeEach
     public void init() {

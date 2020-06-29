@@ -11,6 +11,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SequenceDto {
     
-    
     private String[] dna;
 }
