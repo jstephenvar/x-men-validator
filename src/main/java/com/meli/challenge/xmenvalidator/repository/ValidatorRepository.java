@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @EnableScan
 @Repository
-public interface ValidationRepository extends CrudRepository<ValidationModel, String> {
+public interface ValidatorRepository extends CrudRepository<ValidationModel, String> {
     
     Optional<ValidationModel> findById(String id);
     

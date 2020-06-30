@@ -2,28 +2,33 @@ package com.meli.challenge.xmenvalidator.service;
 
 import com.meli.challenge.xmenvalidator.dto.StatsResponseDto;
 import com.meli.challenge.xmenvalidator.model.ValidationModel;
-import com.meli.challenge.xmenvalidator.repository.ValidationRepository;
+import com.meli.challenge.xmenvalidator.repository.ValidatorRepository;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static com.meli.challenge.xmenvalidator.general.Constants.MSG_STATS_SERVICE;
+
+@Log4j2
 @Service
 public class StatsService {
     
     @Autowired
-    ValidationRepository validationRepository;
+    ValidatorRepository validatorRepository;
     
     /**
-     *
      * @return
      */
     public StatsResponseDto getStatistics() {
         
+        log.info(MSG_STATS_SERVICE);
+        
         AtomicInteger mutants = new AtomicInteger(0);
         AtomicInteger humans = new AtomicInteger(0);
-        List<ValidationModel> records = validationRepository.findAll();
+        List<ValidationModel> records = validatorRepository.findAll();
         if (!records.isEmpty()) {
             records.forEach(validationModel -> {
                         if ((Boolean.parseBoolean(validationModel.getIsMutant()))) {

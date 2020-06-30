@@ -9,10 +9,14 @@ public class Constants {
      * General
      **/
     
+    //Minimun values of chains match counter
+    public static final int MIN_VALUES_MATCH = 1;
     //Final validation chain from dna
     public static final List<String> SEQUENCES = Arrays.asList("AAAA", "CCCC", "GGGG", "TTTT");
     //Min value for validate a chain
     public static final int MIN_VALUE_CROSS = 4;
+    //Swagger base configuration
+    public static final String BASE_PACKAGE_CONFIG = "com.meli.challenge.xmenvalidator.api";
     
     /**
      * Messages Error
@@ -28,5 +32,23 @@ public class Constants {
             "current state of the resource. Deal with the exception here, and/or rethrow at your discretion.";
     public static final String ERROR_SECRET_RESOURCE_NOT_FOUND = " We can't find the resource that you asked for. Deal" +
             " with the exception here, and/or rethrow at your discretion.";
+    
+    /**
+     * Messages Exception
+     */
+    
+    public static final String EX_VALIDATOR = "Error during execution of validator request.";
+    public static final String EX_STATS = "Error during execution of stats request.";
+    public static final String EX_VALIDATOR_SAVING = "Error saving record of dna validation.";
+    
+    /**
+     * Messages Log Info
+     */
+    
+    public static final String MSG_STATS_REQUEST = "Getting stats request.";
+    public static final String MSG_STATS_SERVICE = "Getting statistics service.";
+    public static final String MSG_VALIDATOR_REQUEST = "Getting validation request.";
+    public static final String MSG_VALIDATOR_SERVICE = "Getting validation service.";
+    public static final String MSG_VALIDATOR_SAVING_SUCCESS = "Saved Dna Record Successful";
     
 }

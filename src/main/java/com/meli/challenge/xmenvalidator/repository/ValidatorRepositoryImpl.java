@@ -1,16 +1,22 @@
 package com.meli.challenge.xmenvalidator.repository;
 
+import com.meli.challenge.xmenvalidator.exception.ValidatorException;
 import com.meli.challenge.xmenvalidator.model.ValidationModel;
 import io.reactivex.rxjava3.core.Observable;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.util.Optional;
 
-public class ValidationRepositoryImpl {
+import static com.meli.challenge.xmenvalidator.general.Constants.EX_VALIDATOR_SAVING;
+import static com.meli.challenge.xmenvalidator.general.Constants.MSG_VALIDATOR_SAVING_SUCCESS;
+
+@Log4j2
+public class ValidatorRepositoryImpl {
     
     @Autowired
-    ValidationRepository validationRepository;
+    ValidatorRepository validatorRepository;
     
     /**
      * @param dna
@@ -18,14 +24,17 @@ public class ValidationRepositoryImpl {
      */
     public void save(String dna, boolean validation) {
         
-        Observable.just(validationRepository
+        Observable.just(validatorRepository
                 .save(
                         ValidationModel.builder()
                                 .creationDate(LocalDate.now().toString())
-                                .dna(dna)
+                                .dna(dna.toLowerCase())
                                 .isMutant(String.valueOf(validation))
                                 .build()))
-                .doOnComplete(() -> System.out.println("final"))
+                .doOnError(throwable -> {
+                    throw new ValidatorException(EX_VALIDATOR_SAVING, throwable);
+                })
+                .doOnComplete(() -> log.info(MSG_VALIDATOR_SAVING_SUCCESS))
                 .subscribe();
     }
     
@@ -34,8 +43,7 @@ public class ValidationRepositoryImpl {
      * @return
      */
     public Optional<ValidationModel> existDna(String dna) {
-        return validationRepository.findByDna(dna);
+        return validatorRepository.findByDna(dna);
     }
-    
     
 }
