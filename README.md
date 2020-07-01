@@ -58,9 +58,13 @@ to an instance of Dynamo Db.
 ##Service
 
 ###Rest API Documentation
+
 * Test Service using Swagger UI
 
   Go to path `/x-men-validator-api/v1/swagger-ui.html` 
+  
+  ![Link AWS deployed](`http://x-men-loader-2008599056.us-east-1.elb.amazonaws.com/x-men-validator-api/v1/swagger-ui
+  .html`)
   
   Example :
     ```text
@@ -72,8 +76,10 @@ to an instance of Dynamo Db.
 * Get validation about Dna Sequence
  
     `POST /x-men-validator-api/v1/validate/mutant/`
+    
+    Endpoint AWS [`http://x-men-loader-2008599056.us-east-1.elb.amazonaws.com/x-men-validator-api/v1/validate/mutant/`]
   
-     Curl Example : 
+     Curl Example local : 
   
     ```bash
     curl --location --request POST 'http://localhost:1964/x-men-validator-api/v1/validate/mutant/' \
@@ -93,8 +99,10 @@ to an instance of Dynamo Db.
 * Get Stats about Dna Sequence Validations
  
     `GET /x-men-validator-api/v1/monitor/stats/`
+    
+    Endpoint AWS [`http://x-men-loader-2008599056.us-east-1.elb.amazonaws.com/x-men-validator-api/v1/monitor/stats/`]
   
-     Curl Example : 
+     Curl Example Local : 
   
     ```bash
     curl --location --request GET 'http://localhost:1964/x-men-validator-api/v1/monitor/stats'
