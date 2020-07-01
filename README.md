@@ -50,28 +50,28 @@ $~\room-occupancy-manager\mvn spring-boot:run
 By default, the repository at this moment use DynamoDb. Furthermore, AWS Secret Manager storage the keys to connect 
 to an instance of Dynamo Db.
 
-##Connecting to DynamoDb
+## Connecting to DynamoDb
 
 [Dbeaver Example](https://www.cdata.com/kb/tech/dynamodb-jdbc-dbvr.rst) - Or just access to AIM user - `Note :Credentials
  passed by mail.`
 
-##Service
+## Service
 
-###Rest API Documentation
+### Rest API Documentation
 
 * Test Service using Swagger UI
 
   Go to path `/x-men-validator-api/v1/swagger-ui.html` 
   
-  ![Link AWS deployed](`http://x-men-loader-2008599056.us-east-1.elb.amazonaws.com/x-men-validator-api/v1/swagger-ui
-  .html`)
-  
+  [Link Swagger UI AWS deployed](http://x-men-loader-2008599056.us-east-1.elb.amazonaws.com/x-men-validator-api/v1/swagger-ui.html)
+
   Example :
     ```text
     http://localhost:1964/x-men-validator-api/v1/swagger-ui.html
     ```
     And there you can test the method with help of the UI.
-###Test Service By Postman
+    
+### Test Service By Postman
 
 * Get validation about Dna Sequence
  
