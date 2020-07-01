@@ -10,7 +10,7 @@
   </parent>
   <groupId>com.meli.challenge</groupId>
   <artifactId>x-men-validator</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.2-SNAPSHOT</version>
   <name>x-men-validator</name>
   <description>X-Men Validator Tool Microservice</description>
 
@@ -137,6 +137,11 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>3.6.1.1688</version>
       </plugin>
     </plugins>
   </build>

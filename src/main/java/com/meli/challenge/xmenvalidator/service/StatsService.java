@@ -7,6 +7,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -39,12 +41,15 @@ public class StatsService {
                     }
             );
         }
+        
+        BigDecimal ratio = new BigDecimal((mutants.get() != 0 && humans.get() != 0) ?
+                String.valueOf((mutants.get() / (double) humans.get())) :
+                "0.0");
+        
         return StatsResponseDto.builder()
                 .countMutantDna(String.valueOf(mutants.get()))
                 .countHumanDna(String.valueOf(humans.get()))
-                .ratio((mutants.get() != 0 && humans.get() != 0) ?
-                        String.valueOf((mutants.get() / (double) humans.get())) :
-                        "0.0")
+                .ratio(ratio.setScale(1, RoundingMode.HALF_EVEN).toPlainString())
                 .build();
     }
     

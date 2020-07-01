@@ -9,11 +9,13 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 import static com.meli.challenge.xmenvalidator.general.Constants.MIN_VALUE_CROSS;
 import static com.meli.challenge.xmenvalidator.general.Constants.MSG_VALIDATOR_SERVICE;
-import static com.meli.challenge.xmenvalidator.general.Constants.SEQUENCES;
+
 
 @Log4j2
 @Service
@@ -22,6 +24,9 @@ public class ValidatorService {
     private static final String VALIDATE_HORIZONTAL_MSG = "Validate Horizontal.";
     private static final String VALIDATE_VERTICAL_MSG = "Validate Vertical.";
     private static final String VALIDATE_CROSS_AXES_MSG = "Validate Cross Axes";
+    //Final validation chain from dna
+    private static final List<String> Sequences = Arrays.asList("AAAA", "CCCC", "GGGG", "TTTT");
+    
     
     @Autowired
     ValidatorRepositoryImpl validatorRepository;
@@ -38,7 +43,7 @@ public class ValidatorService {
         log.info(MSG_VALIDATOR_SERVICE);
         
         int countMutantChain = 0;
-        Optional<ValidationModel> exist = validatorRepository.existDna(Arrays.toString(dna).toLowerCase());
+        Optional<ValidationModel> exist = validatorRepository.existDna(Arrays.toString(dna).toLowerCase(Locale.getDefault()));
         if (!exist.isPresent()) {
             if (dna != null && dna.length != 0) {
                 log.info(VALIDATE_HORIZONTAL_MSG);
@@ -212,7 +217,7 @@ public class ValidatorService {
     private int validateSequence(String chain, int counter) {
         if (chain.length() >= MIN_VALUE_CROSS) {
             for (int i = 0; i < chain.length() - 3; i++) {
-                for (String sequence : SEQUENCES) {
+                for (String sequence : Sequences) {
                     if (chain.substring(i, 4 + i).equalsIgnoreCase(sequence)) {
                         counter++;
                     }

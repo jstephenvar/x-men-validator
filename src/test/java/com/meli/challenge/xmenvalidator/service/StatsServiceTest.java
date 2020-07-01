@@ -70,9 +70,7 @@ class StatsServiceTest {
     public void getStatistics_Failure() {
         
         when(validatorRepository.findAll()).thenReturn(null);
-        assertThrows(Exception.class, () -> {
-            statsService.getStatistics();
-        });
+        assertThrows(Exception.class, () -> statsService.getStatistics());
     }
     
     

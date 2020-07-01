@@ -57,9 +57,7 @@ class ValidatorControllerTest {
     @Test
     public void given_sequence_isMutant_Exception() {
         when(validatorService.isMutant(any())).thenThrow(new RuntimeException(""));
-        assertThrows(ValidatorException.class, () -> {
-            validatorController.isMutant(SequenceDto.builder().dna(DNA_MATCH).build());
-        });
+        assertThrows(ValidatorException.class, () -> validatorController.isMutant(SequenceDto.builder().dna(DNA_MATCH).build()));
     }
     
 }

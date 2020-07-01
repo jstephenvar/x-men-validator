@@ -40,9 +40,7 @@ class ValidatorRepositoryImplTest {
     @Test
     public void saveRecord_Fail_Throw_Exception() {
         when(validatorRepository.save(any())).thenThrow(new ValidatorException("", new RuntimeException()));
-        assertThrows(ValidatorException.class, () -> {
-            validatorRepositoryImpl.save("", true);
-        });
+        assertThrows(ValidatorException.class, () -> validatorRepositoryImpl.save("", true));
     }
     
     @Test

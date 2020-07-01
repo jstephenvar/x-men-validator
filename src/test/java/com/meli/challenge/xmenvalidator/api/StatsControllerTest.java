@@ -51,9 +51,7 @@ class StatsControllerTest {
     @Test
     public void get_Stats_Request_Exception() {
         when(statsService.getStatistics()).thenThrow(new RuntimeException(""));
-        assertThrows(StatsException.class, () -> {
-            statsController.getStats();
-        });
+        assertThrows(StatsException.class, () -> statsController.getStats());
         
     }
 }

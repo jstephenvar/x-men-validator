@@ -7,6 +7,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
+import java.util.Locale;
 import java.util.Optional;
 
 import static com.meli.challenge.xmenvalidator.general.Constants.EX_VALIDATOR_SAVING;
@@ -28,7 +29,7 @@ public class ValidatorRepositoryImpl {
                 .save(
                         ValidationModel.builder()
                                 .creationDate(LocalDate.now().toString())
-                                .dna(dna.toLowerCase())
+                                .dna(dna.toLowerCase(Locale.getDefault()))
                                 .isMutant(String.valueOf(validation))
                                 .build()))
                 .doOnError(throwable -> {
