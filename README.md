@@ -50,6 +50,11 @@ $~\room-occupancy-manager\mvn spring-boot:run
 By default, the repository at this moment use DynamoDb. Furthermore, AWS Secret Manager storage the keys to connect 
 to an instance of Dynamo Db.
 
+##Connecting to DynamoDb
+
+[Dbeaver Example](https://www.cdata.com/kb/tech/dynamodb-jdbc-dbvr.rst) - Or just access to AIM user - `Note :Credentials
+ passed by mail.`
+
 ##Service
 
 ###Rest API Documentation
