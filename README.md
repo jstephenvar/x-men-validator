@@ -139,7 +139,7 @@ The unit testing with Junit and Mockito, Integration Testing with MockMvc.
 
 * `Coverage Jacoco : 98%` with valid exceptions.
 
-    ![Jacoco validation example](https://github.com/jstephenvar/x-men-validator/documentation/jacoco-coverage-img.jpg)
+    ![Jacoco validation example](https://github.com/jstephenvar/x-men-validator/blob/master/documentation/jacoco-coverage-img.jpg)
 
 Example unit testing
 
@@ -198,6 +198,10 @@ public class StatsApiControllerTest {
 }
 ```
 
+### Service Architecture Diagram
+
+![AWS architecture](https://github.com/jstephenvar/x-men-validator/blob/master/documentation/architecture-service-img.jpg)
+
 ### High payload and concurrency
 
 This test was perform with [Apache HTTP server benchmarking tool](https://httpd.apache.org/docs/2.4/programs/ab.html) 
@@ -206,13 +210,13 @@ This test was perform with [Apache HTTP server benchmarking tool](https://httpd.
 
     command : `./ab -n 1000 -c 100 -m POST http://localhost:1964/x-men-validator-api/v1/validate/mutant/`
     
-    ![Result](https://github.com/jstephenvar/x-men-validator/documentation/validator-request-concurrency-img.jpg)
+    ![Result](https://github.com/jstephenvar/x-men-validator/blob/master/documentation/validator-request-concurrency-img.jpg)
     
 * Stats 
 
     command : `./ab -n 100 -c 10 -m GET http://localhost:1964/x-men-validator-api/v1/monitor/stats`
     
-    ![Result](https://github.com/jstephenvar/x-men-validator/documentation/stats-request-concurrency-img.jpg)
+    ![Result](https://github.com/jstephenvar/x-men-validator/blob/master/documentation/stats-request-concurrency-img.jpg)
 
 ## Code analyze with SonarQube - Optional
 
@@ -222,7 +226,7 @@ Run over project path:
 mvn clean verify sonar:sonar
 ```
 
-![Sonar validation example](https://github.com/jstephenvar/x-men-validator/documentation/sonarqube-img.jpg)
+![Sonar validation example](https://github.com/jstephenvar/x-men-validator/blob/master/documentation/sonarqube-img.jpg)
 
 ## Built with
 
