@@ -9,6 +9,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Model entity from validations
+ *
+ * @author johan.vargas
+ * @version 0.0.2-SNAPSHOT
+ */
 @Data
 @Builder
 @AllArgsConstructor

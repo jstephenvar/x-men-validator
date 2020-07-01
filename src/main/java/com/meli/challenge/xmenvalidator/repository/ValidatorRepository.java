@@ -9,6 +9,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Validator Repository handler
+ *
+ * @author johan.vargas
+ * @version 0.0.2-SNAPSHOT
+ */
 @EnableScan
 @Repository
 public interface ValidatorRepository extends CrudRepository<ValidationModel, String> {

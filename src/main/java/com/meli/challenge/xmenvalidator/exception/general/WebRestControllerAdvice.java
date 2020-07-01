@@ -11,6 +11,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import static com.meli.challenge.xmenvalidator.general.Constants.EX_STATS;
 import static com.meli.challenge.xmenvalidator.general.Constants.EX_VALIDATOR;
 
+/**
+ * Global web exception handling
+ *
+ * @author johan.vargas
+ * @version 0.0.2-SNAPSHOT
+ */
+
 @Log4j2
 @RestControllerAdvice
 public class WebRestControllerAdvice {

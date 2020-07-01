@@ -9,6 +9,12 @@ import javax.validation.constraints.NotNull;
 
 import static com.meli.challenge.xmenvalidator.general.Constants.ERROR_NULL_DNA;
 
+/**
+ * Dto for Sequence mapping income
+ *
+ * @author johan.vargas
+ * @version 0.0.2-SNAPSHOT
+ */
 @Data
 @Builder
 @AllArgsConstructor

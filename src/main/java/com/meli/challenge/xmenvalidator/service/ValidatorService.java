@@ -17,10 +17,19 @@ import static com.meli.challenge.xmenvalidator.general.Constants.MIN_VALUE_CROSS
 import static com.meli.challenge.xmenvalidator.general.Constants.MSG_VALIDATOR_SERVICE;
 
 
+/**
+ * Service for Validator
+ *
+ * @author johan.vargas
+ * @version 0.0.2-SNAPSHOT
+ */
 @Log4j2
 @Service
 public class ValidatorService {
     
+    /**
+     * Variables for validation messages directionals
+     */
     private static final String VALIDATE_HORIZONTAL_MSG = "Validate Horizontal.";
     private static final String VALIDATE_VERTICAL_MSG = "Validate Vertical.";
     private static final String VALIDATE_CROSS_AXES_MSG = "Validate Cross Axes";
@@ -35,7 +44,7 @@ public class ValidatorService {
      * Validate is mutant according to the dna sequence
      *
      * @param dna sequence string array
-     * @return boolean
+     * @return boolean validation
      */
     @Cacheable("dna")
     public boolean isMutant(String[] dna) {
@@ -69,7 +78,7 @@ public class ValidatorService {
      * Validate horizontal axe
      *
      * @param dna sequence string array
-     * @return Integer
+     * @return Integer match found
      */
     private int validateHorizontal(String[] dna) {
         int counter = 0;
@@ -83,7 +92,7 @@ public class ValidatorService {
      * Validate vertical axe
      *
      * @param dna sequence string array
-     * @return Integer
+     * @return Integer match found
      */
     private int validateVertical(String[] dna) {
         int counter = 0;
@@ -106,7 +115,7 @@ public class ValidatorService {
      * Validate cross axe
      *
      * @param dna sequence string array
-     * @return Integer
+     * @return Integer match found
      */
     private int validateCross(String[] dna) {
         int counter = 0;
@@ -123,7 +132,7 @@ public class ValidatorService {
      * Validate from left to right transversal
      *
      * @param dna sequence string array
-     * @return Integer
+     * @return Integer match found
      */
     private int validateCrossLeftToRight(String[] dna) {
         return validateDirection(dna, true);
@@ -133,7 +142,7 @@ public class ValidatorService {
      * Validate from right to left transversal
      *
      * @param dna sequence string array
-     * @return Integer
+     * @return Integer match found
      */
     private int validateCrossRightToLeft(String[] dna, int actualCounter) {
         //If actual counter is greater than 1 don't perform operation
@@ -147,7 +156,7 @@ public class ValidatorService {
      * Validate left transversal
      *
      * @param dna sequence string array
-     * @return Integer
+     * @return Integer match found
      */
     private int validateDirection(String[] dna, boolean isLeftToRight) {
         int c = 0;
@@ -185,7 +194,7 @@ public class ValidatorService {
      * @param i   int iteration i value
      * @param j   int iteration j value
      * @param dna sequence string array
-     * @return Integer
+     * @return Integer match found
      */
     private int getTraverse(int i, int j, String[] dna, boolean isLeftToRight) {
         StringBuilder sequence = new StringBuilder();
@@ -210,9 +219,12 @@ public class ValidatorService {
     }
     
     /**
-     * @param chain
-     * @param counter
-     * @return
+     * Validate sequence dna if match according with business rules of this sequence
+     * ["AAAA", "CCCC", "GGGG", "TTTT"]
+     *
+     * @param chain   String sequence
+     * @param counter int counter
+     * @return Integer match found
      */
     private int validateSequence(String chain, int counter) {
         if (chain.length() >= MIN_VALUE_CROSS) {

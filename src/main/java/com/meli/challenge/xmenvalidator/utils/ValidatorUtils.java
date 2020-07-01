@@ -4,6 +4,12 @@ import lombok.experimental.UtilityClass;
 
 import static com.meli.challenge.xmenvalidator.general.Constants.MIN_VALUES_MATCH;
 
+/**
+ * Validator Utils
+ *
+ * @author johan.vargas
+ * @version 0.0.2-SNAPSHOT
+ */
 @UtilityClass
 public class ValidatorUtils {
     

@@ -3,6 +3,7 @@ package com.meli.challenge.xmenvalidator.service;
 import com.meli.challenge.xmenvalidator.dto.StatsResponseDto;
 import com.meli.challenge.xmenvalidator.model.ValidationModel;
 import com.meli.challenge.xmenvalidator.repository.ValidatorRepository;
+import io.reactivex.rxjava3.core.Observable;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.meli.challenge.xmenvalidator.general.Constants.MSG_STATS_SERVICE;
 
+/**
+ * Service for Stats
+ *
+ * @author johan.vargas
+ * @version 0.0.2-SNAPSHOT
+ */
 @Log4j2
 @Service
 public class StatsService {
@@ -22,12 +29,23 @@ public class StatsService {
     ValidatorRepository validatorRepository;
     
     /**
-     * @return
+     * Get statistics handling with observable
+     *
+     * @return StatsResponseDto response
      */
     public StatsResponseDto getStatistics() {
-        
         log.info(MSG_STATS_SERVICE);
-        
+        return Observable.just(getStatsRecords())
+                .singleElement()
+                .blockingGet();
+    }
+    
+    /**
+     * Get stats records from db
+     *
+     * @return StatsResponseDto response
+     */
+    private StatsResponseDto getStatsRecords() {
         AtomicInteger mutants = new AtomicInteger(0);
         AtomicInteger humans = new AtomicInteger(0);
         List<ValidationModel> records = validatorRepository.findAll();
@@ -52,5 +70,4 @@ public class StatsService {
                 .ratio(ratio.setScale(1, RoundingMode.HALF_EVEN).toPlainString())
                 .build();
     }
-    
 }

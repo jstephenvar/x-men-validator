@@ -12,6 +12,12 @@ import org.springframework.http.HttpStatus;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Handle responses with a error builder spec.
+ *
+ * @author johan.vargas
+ * @version 0.0.2-SNAPSHOT
+ */
 @Data
 @Builder
 @NoArgsConstructor

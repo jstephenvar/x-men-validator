@@ -13,6 +13,12 @@ import java.util.Optional;
 import static com.meli.challenge.xmenvalidator.general.Constants.EX_VALIDATOR_SAVING;
 import static com.meli.challenge.xmenvalidator.general.Constants.MSG_VALIDATOR_SAVING_SUCCESS;
 
+/**
+ * Validator of implementation bridge handler
+ *
+ * @author johan.vargas
+ * @version 0.0.2-SNAPSHOT
+ */
 @Log4j2
 public class ValidatorRepositoryImpl {
     
@@ -20,8 +26,10 @@ public class ValidatorRepositoryImpl {
     ValidatorRepository validatorRepository;
     
     /**
-     * @param dna
-     * @param validation
+     * Save dna and validation
+     *
+     * @param dna        String sequence
+     * @param validation boolean result
      */
     public void save(String dna, boolean validation) {
         
@@ -40,8 +48,10 @@ public class ValidatorRepositoryImpl {
     }
     
     /**
-     * @param dna
-     * @return
+     * Validate if dna already exist
+     *
+     * @param dna String sequence
+     * @return Optional<ValidationModel> with the result ModelDto
      */
     public Optional<ValidationModel> existDna(String dna) {
         return validatorRepository.findByDna(dna);

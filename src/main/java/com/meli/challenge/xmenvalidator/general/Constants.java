@@ -1,5 +1,11 @@
 package com.meli.challenge.xmenvalidator.general;
 
+/**
+ * General params and constants
+ *
+ * @author johan.vargas
+ * @version 0.0.2-SNAPSHOT
+ */
 public class Constants {
     
     /**
@@ -46,7 +52,7 @@ public class Constants {
     
     /**
      * Private constructor by default
-      */
+     */
     private Constants() {
     
     }
