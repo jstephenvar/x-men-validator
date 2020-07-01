@@ -2,6 +2,7 @@ package com.meli.challenge.xmenvalidator.api;
 
 
 import com.meli.challenge.xmenvalidator.dto.SequenceDto;
+import com.meli.challenge.xmenvalidator.exception.ValidatorException;
 import com.meli.challenge.xmenvalidator.service.ValidatorService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import static com.meli.challenge.xmenvalidator.MockUtils.DNA_MATCH;
 import static com.meli.challenge.xmenvalidator.MockUtils.DNA_UNMATCH;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -50,6 +52,12 @@ class ValidatorControllerTest {
     public void given_sequence_isMutant_NullSequence_Forbidden() {
         ResponseEntity<String> response = validatorController.isMutant(SequenceDto.builder().build());
         assertEquals(HttpStatus.FORBIDDEN.value(), response.getStatusCodeValue());
+    }
+    
+    @Test
+    public void given_sequence_isMutant_Exception() {
+        when(validatorService.isMutant(any())).thenThrow(new RuntimeException(""));
+        assertThrows(ValidatorException.class, () -> validatorController.isMutant(SequenceDto.builder().dna(DNA_MATCH).build()));
     }
     
 }

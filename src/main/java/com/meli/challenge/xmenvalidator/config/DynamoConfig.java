@@ -76,7 +76,7 @@ public class DynamoConfig {
         
         GetSecretValueRequest getSecretValueRequest = new GetSecretValueRequest()
                 .withSecretId(this.secretName);
-        GetSecretValueResult getSecretValueResult = null;
+        GetSecretValueResult getSecretValueResult;
         
         try {
             getSecretValueResult = client.getSecretValue(getSecretValueRequest);

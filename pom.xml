@@ -10,7 +10,7 @@
   </parent>
   <groupId>com.meli.challenge</groupId>
   <artifactId>x-men-validator</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.2-SNAPSHOT</version>
   <name>x-men-validator</name>
   <description>X-Men Validator Tool Microservice</description>
 
@@ -81,6 +81,16 @@
       <artifactId>rxjava</artifactId>
       <version>3.0.4</version>
     </dependency>
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger2</artifactId>
+      <version>2.9.2</version>
+    </dependency>
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger-ui</artifactId>
+      <version>2.9.2</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -88,6 +98,50 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.5</version>
+        <configuration>
+          <excludes>
+            <exclude>**/XMenValidatorApplication.*</exclude>
+            <exclude>**/config/**</exclude>
+            <exclude>**/dto/**</exclude>
+            <exclude>**/model/**</exclude>
+            <exclude>**/utils/**</exclude>
+            <exclude>**/exception/general/*ExceptionResponse.*</exclude>
+            <exclude>**/exception/general/*ExceptionResponse$*.*</exclude>
+          </excludes>
+          <rules>
+            <rule>
+              <element>CLASS</element>
+              <excludes>
+                <exclude>JAVAC.SYNTHCLASS</exclude>
+                <exclude>JAVAC.SYNTHMETH</exclude>
+              </excludes>
+            </rule>
+          </rules>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report</id>
+            <phase>test</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>3.6.1.1688</version>
       </plugin>
     </plugins>
   </build>
